@@ -1,0 +1,7 @@
+{
+  "name": "app-scary-history",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
