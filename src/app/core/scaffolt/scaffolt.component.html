@@ -1,0 +1,26 @@
+  <ion-tabs>
+    <!--<ion-header *ngIf="showTab">
+      <ion-toolbar>
+        <ion-title>Library</ion-title>
+      </ion-toolbar>
+    </ion-header>-->
+    <ion-tab-bar slot="bottom" *ngIf="showTab" style="font-size: 10px">
+      <ion-tab-button tab="home">
+        <ion-icon aria-hidden="true" name="home"></ion-icon>
+        Inicio
+      </ion-tab-button>
+      <ion-tab-button tab="category" style="font-size: 10px">
+        <ion-icon aria-hidden="true" name="grid"></ion-icon>
+        Categorias
+      </ion-tab-button>
+      <ion-tab-button tab="favorities" style="font-size: 10px">
+        <ion-icon aria-hidden="true" name="heart"></ion-icon>
+        Favoritos
+      </ion-tab-button>
+      <ion-tab-button tab="setting" style="font-size: 10px">
+        <ion-icon aria-hidden="true" name="settings"></ion-icon>
+        Setting
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+

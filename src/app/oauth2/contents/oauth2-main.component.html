@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="container d-flex px-4">
+    <div class="main flex-grow-1">
+      <div class="title text-center">
+        <h1>Titulo de la aplicación</h1>
+      </div>
+      <form [formGroup]="form" >
+        <ion-item fill="outline" color="tertiary">
+          <ion-label color="tertiary" position="floating">Email</ion-label>
+          <ion-input formControlName="email" placeholder="Enter text"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item fill="outline">
+          <ion-label color="tertiary" position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Enter text"></ion-input>
+        </ion-item>
+        <div class="text-end py-2">
+          <small class="ms-auto">Olvide la contraseña</small>
+        </div>
+        <ion-button color="tertiary" expand="block" type="submit" [disabled]="form.invalid" (click)="login()">Iniciar sesión</ion-button>
+        <br>
+        <div class="line-container">
+          <div class="line"></div>
+          <div class="line-text">or</div>
+          <div class="line"></div>
+        </div>
+        <br>
+        <ion-button color="tertiary" expand="block">Regristrarse</ion-button>
+      </form>
+    </div>
+    <div class="version">
+      <small>Versión 1.1</small>
+    </div>
+  </div>
+</ion-content>
+

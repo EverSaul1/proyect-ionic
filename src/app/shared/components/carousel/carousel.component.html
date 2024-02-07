@@ -1,0 +1,21 @@
+<div>
+  <ion-slides (ionSlideDidChange)="onSlideChanged()">
+    <ion-slide *ngFor="let image of dataGigant">
+      <div class="card-image" (click)="navigateUrlHistory(image.id)">
+        <img [src]="'https://res.cloudinary.com/dzepvqbgz/image/upload/v1692657127/'+ image.imagen" alt="Slide Image">
+        <div class="play-class" *ngIf="image.type !== 'TEXT'">
+          <ion-icon name="play" class="play-icon"></ion-icon>
+        </div>
+        <span class="image-text">{{image.name | uppercase}}</span>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <div class="custom-pagination">
+  <span
+    class="dot"
+    *ngFor="let image of dataGigant; let i = index"
+    [class.active]="i === activeSlide"
+    (click)="goToSlide(i)"
+  ></span>
+  </div>
+</div>

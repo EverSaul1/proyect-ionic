@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comentarios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()"><ion-icon name="arrow-back-circle"></ion-icon>&nbsp;Volver</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Actualizar Comentarios"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando....."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+<div class="container">
+  <ng-template #recursiveList let-list let-level="level" let-parent="parent">
+    <div class="my-2">
+      <div *ngFor="let item of list; let i = index" class="comment-item">
+        <div class="comment-box">
+          <div class="comment-avatar">
+            <img [src]="item.avatar? './assets/icon/'+item.avatar+'.png': './assets/img/avatar.png'" alt="">
+          </div>
+          <div class="d-flex flex-column" style="margin-left: 45px">
+            <div class="comment-head">
+              <h6 class="comment-name">{{ item.fullName | uppercase}}</h6>
+              <div class="comment-content" >
+                <p >{{ item.comentario }}</p>
+              </div>
+            </div>
+            <div class="comment-content d-flex mx-2">
+              <small class="mx-2">{{item.fecha}}</small>
+              <small class="mx-2" *ngIf="userservice !== undefined" [id]="item.id">Opciones</small>
+              <small class="mx-2" *ngIf="userservice === undefined" [id]="item.id">Opciones</small>
+            </div>
+          </div>
+          <ion-modal #modal *ngIf="userservice !== undefined" [trigger]="item.id" [initialBreakpoint]="userservice.id === item.userId?0.25: 0.13" [breakpoints]="[0.25]">
+            <ng-template>
+              <ion-content>
+
+                <ion-list>
+                  <ion-list-header>
+                    <h5>Opciones</h5>
+                  </ion-list-header>
+                  <ion-item style="background-color: #2dd36f" (click)="setValueNombre(item.fullName)">
+                    <ion-icon color="danger" name="chatbox-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Responder</h2>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="userservice.id === item.userId" (click)="editComentario(item)">
+                    <ion-icon color="danger"  name="create-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Editar</h2>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="userservice.id === item.userId" (click)="eliminarComentario(item.id)">
+                    <ion-icon color="danger"  name="chatbox-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Eliminar</h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+          <ion-modal #modal *ngIf="userservice === undefined" [trigger]="item.id" [initialBreakpoint]="user.email === item.email && user.nombre === item.fullName?0.25: 0.13" [breakpoints]="[0.25]">
+            <ng-template>
+              <ion-content>
+
+                <ion-list>
+                  <ion-list-header>
+                    <h5>Opciones</h5>
+                  </ion-list-header>
+                  <ion-item style="background-color: #2dd36f" (click)="setValueNombre(item.fullName)">
+                    <ion-icon color="danger" name="chatbox-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Responder</h2>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="user.email === item.email && user.nombre === item.fullName" (click)="editComentario(item)">
+                    <ion-icon color="danger"  name="create-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Editar</h2>
+                    </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="user.email === item.email && user.nombre === item.fullName" (click)="eliminarComentario(item.id)">
+                    <ion-icon color="danger"  name="chatbox-outline"></ion-icon>
+                    <ion-label class="mx-3">
+                      <h2>Eliminar</h2>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+
+        </div>
+        <div class="comment-thread">
+          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.child_responses, level: level + 1, parent: item }"></ng-container>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: comentarios,  level: 0, parent: null }"></ng-container>
+
+</div>
+</ion-content>
+<ion-footer>
+  <div>
+      <div class="commentss">
+        <ion-input class="input" placeholder="Agregar Comentario..." [formControl]="termino" (keyup.enter)="addComentarioSinAutenticar()"></ion-input>
+        <ion-button  size="smalll" color="danger" (click)="addComentarioSinAutenticar()" [disabled]="termino.invalid"><ion-icon  name="send" ></ion-icon></ion-button>
+      </div>
+
+  </div>
+</ion-footer>
+

@@ -1,0 +1,33 @@
+<div class="list-container">
+  <div class="d-flex justify-content-between">
+    <small class="d-flex align-items-center"><ion-icon name="flash" class="mx-2"></ion-icon><strong>{{msj}}</strong></small>
+  </div>
+  <ion-card *ngFor="let item of historias" >
+    <div class="card-container" *ngIf="item.type === 'TEXT'" (click)="openModal(item)">
+      <div class="card-image" >
+        <img src="./assets/img/fondo.jpg" alt="Descripción de la imagen">
+      </div>
+      <div class="card-content">
+        <h5>{{item.name | uppercase}}</h5>
+        <div class="d-flex align-items-center">
+          <small>Publicado: {{item.createAt | date: 'MMM d, y'}}</small>
+        </div>
+        <div class="d-flex align-items-start flex-column flex-wrap">
+          <ion-badge class="my-1" slot="end" [color]="item.leido? 'tertiary': 'medium'">{{item.leido? 'Historia leída': 'Historia No leída'}}</ion-badge>
+          <ion-badge *ngIf="item.favorito" class="my-2" slot="end" color="danger">Favorito</ion-badge>
+        </div>
+        <div class="d-flex align-items-center" >
+          <ion-badge class="d-flex align-items-center" slot="end" color="success"> <ion-icon  name="eye" style="font-size: 18px"></ion-icon>&nbsp;{{item.total_visto}}</ion-badge>
+
+          <ion-badge class="d-flex align-items-center mx-2" slot="end" color="warning"> <ion-icon  name="chatbubbles" style="font-size: 18px"></ion-icon>&nbsp;{{item.total_comentarios}}</ion-badge>
+        </div>
+      </div>
+      <ion-badge *ngIf="usuario !== undefined" slot="end" color="danger">
+        <ion-icon [name]="item.favorito? 'heart':'heart-outline'" style="font-size: 15px" ></ion-icon>
+      </ion-badge>
+      <ion-badge *ngIf="usuario === undefined" slot="end" color="danger">
+        <ion-icon [name]="item.favorito? 'heart':'heart-outline'" style="font-size: 15px"></ion-icon>
+      </ion-badge>
+    </div>
+  </ion-card>
+</div>

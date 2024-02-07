@@ -1,0 +1,20 @@
+
+<ion-range [(ngModel)]="volume" min="0" max="1" step="0.1" (ionChange)="onVolumeChange($event)"></ion-range>
+{{playlist.title}}
+<ion-buttons>
+  <ion-button (click)="previousTrack()">
+    <ion-icon name="play-skip-back"></ion-icon>
+  </ion-button>
+  <ion-button (click)="playPause()">
+    <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+  </ion-button>
+  <ion-button (click)="nextTrack()">
+    <ion-icon name="play-skip-forward"></ion-icon>
+  </ion-button>
+</ion-buttons>
+<!--<ion-list>
+  <ion-item *ngFor="let track of data" (click)="playTrack(track)">
+    {{ track.title }}
+  </ion-item>
+</ion-list>-->
+

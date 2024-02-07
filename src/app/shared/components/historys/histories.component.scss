@@ -1,0 +1,127 @@
+ion-title {
+  color: var(--ion-color-tertiary-shade);
+  font-weight: bold;
+  font-family: Nosifer, serif;
+  font-size: 20px;
+
+}
+small{
+  font-family: Verdana, serif;
+  font-size: 11px;
+
+}
+.container {
+  .title {
+    padding-top: 20px;
+    h1 {
+      font-family: Nosifer, serif;
+      font-size: 20px;
+    }
+  }
+}
+ion-card-header {
+  font-family: Verdana, serif;
+}
+ion-card{
+  ion-card-header{
+    ion-card-title{
+      font-size: 15px;
+      ion-card-subtitle {
+        font-size: 1px;
+      }
+    }
+  }
+}
+
+.card-container {
+  display: flex;
+  align-items: start;
+}
+ion-card {
+  border-radius: 10px;
+}
+.card-image {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+  padding: 10px 5px;
+  overflow: hidden;
+  img{
+    border-radius: 10px;
+    width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+    height: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+    object-fit: cover
+  }
+
+  .play-class{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.3);;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    .play-icon{
+      font-size: 48px;
+      color: white;
+    }
+  }
+
+}
+.card-image:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 15%);
+}
+
+.card-content {
+  flex-grow: 1;
+  padding: 10px;
+  h5{
+    font-family: Verdana, serif;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.card-text {
+  padding: 0;
+}
+span{
+  margin-right: 10px;
+  font-family: Arial,'ITC Blair', sans-serif;
+  font-size: 10px;
+  color: white;
+  strong{
+    ion-icon{
+      margin: 0 3px;
+      font-size: 15px;
+    }
+  }
+}
+.visto{
+  background-color: #00D68F;
+  border: 1px solid #00D68F;
+  border-radius: 5px;
+  padding: 5px;
+}
+.chat{
+  background-color: #FFAC05;
+  border-radius: 5px;
+  padding: 5px;
+}
+.img-skeleton{
+  border-radius: 10px;
+  width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  height: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
+  object-fit: cover
+}

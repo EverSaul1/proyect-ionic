@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="" style=" color: var(--ion-color-danger-shade); font-weight: bold">
+      Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Actualizar Historias"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando....."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="d-flex justify-content-end align-items-center">
+    <label class="label" style="color: var(--ion-color-danger-shade); font-size: 13px; font-weight: bold">Leer sin conexión</label>
+    <ion-toggle color="danger" aria-label="Tertiary toggle" (ionChange)="valueConexion($event)"></ion-toggle>
+  </div>
+  <div class="container my-1">
+    <app-histories *ngIf="!conexion" [historias] = "data"
+                   [usuario]="usuario"
+                   [msj] = "'Favoritos'"
+                   (emmitEventActData) = emmitEventActDataForm($event)>
+    </app-histories>
+    <app-history-sin-conexion *ngIf="conexion" [historias] = "data"
+                   [usuario]="usuario"
+                   [msj] = "'Favoritos'">
+    </app-history-sin-conexion>
+  </div>
+  <div *ngIf="data.length=== 0" class="d-flex flex-column justify-content-center" style="min-height: 90%">
+    <div  class="d-flex flex-column align-items-center justify-content-center">
+      <ion-icon name="warning-outline" style="font-size: 100px"></ion-icon>
+      <small style=" color: var(--ion-color-tertiary-shade); font-size: 17px">No se encontraron resultados</small>
+    </div>
+  </div>
+</ion-content>

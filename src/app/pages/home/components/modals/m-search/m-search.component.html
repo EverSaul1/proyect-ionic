@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="commentss">
+      <ion-input class="input" placeholder="Buscar historia..." [formControl]="termino" (keyup.enter)="getHistoryAll()"></ion-input>
+      <ion-button  size="small" color="danger" (click)="getHistoryAll()" [disabled]="termino.invalid"><ion-icon  name="search" ></ion-icon></ion-button>
+    </div>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" style="font-size: 22px" class="mx-2" (click)="cancel()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Actualizar Historias"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando....."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <app-histories [historias] = "data"
+                 [usuario]="usuario"
+                 [msj] = "msj"
+                 (emmitEventActData) = emmitEventActDataForm($event)>
+  </app-histories>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="font-weight: bold">Configuración</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" color="danger">Aceptar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <ion-radio-group [(ngModel)]="fontSize">
+      <ion-list-header>
+        Seleccione el Tamaño de letra
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Pequeño</ion-label>
+        <ion-radio color="danger" slot="start" value="13px"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mediano</ion-label>
+        <ion-radio color="danger" slot="start" value="15px"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Grande</ion-label>
+        <ion-radio color="danger" slot="start" value="17px"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-radio-group [(ngModel)]="fontInter">
+      <ion-list-header>
+        Seleccione el Interlineado
+      </ion-list-header>
+      <ion-item>
+        <ion-label>2</ion-label>
+        <ion-radio color="danger" slot="start" value="2"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>2.5</ion-label>
+        <ion-radio color="danger" slot="start" value="2.5"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>2.8</ion-label>
+        <ion-radio color="danger" slot="start" value="2.8"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+  <ion-list-header>Volumen musica</ion-list-header>
+  <ion-list>
+    <ion-item>
+      <ion-range color="danger" [(ngModel)]="volumen" min="0.1" max="1" step="0.1" (ionChange)="onVolumeChange($event)"></ion-range>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

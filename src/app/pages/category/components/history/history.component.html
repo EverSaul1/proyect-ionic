@@ -1,0 +1,128 @@
+<ion-header>
+  <ion-buttons slot="end">
+    <ion-button color="medium" (click)="cancel()"><ion-icon name="arrow-back-circle"></ion-icon>&nbsp;Volver</ion-button>
+  </ion-buttons>
+  <div class="container d-flex justify-content-between align-items-center">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" color="medium" style="font-size: 22px; margin-right: 5px " (click)="cancel()"></ion-icon>
+    </ion-buttons>
+    <ion-title style="max-width: 50%">{{categoryName || 'Favoritos'}}</ion-title>
+    <!--<div class="d-flex justify-content-end align-items-center flex-grow-1">
+      <ion-fab>
+        <ion-fab-button size="small" color="danger">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="bottom">
+          <ion-fab-button>
+            <ion-icon name="document"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="color-palette"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="globe"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>-->
+
+    <div class="d-flex justify-content-end align-items-center flex-grow-1">
+      <!--<ion-button color="danger"  shape="round" size="small" *ngIf="usuario !== undefined" (click)="favorito(data)">
+        <ion-icon [name]="data.favorito? 'heart': 'heart-outline'"></ion-icon>
+      </ion-button>-->
+      <ion-button color="warning" shape="round" size="small" (click)="toggleAudio()">
+        <ion-icon [name]="isPlaying ? 'volume-high' : 'volume-mute'"></ion-icon>
+      </ion-button>
+      <ion-button color="medium" fill="clear" shape="round" size="small" (click)="openConfiguration()"><ion-icon style="font-size: 23px" name="settings-outline" ></ion-icon></ion-button>
+      <ion-button shape="round" fill="clear" size="small" color="medium"><ion-icon style="font-size: 23px" name="share-social"></ion-icon></ion-button>
+    </div>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ng-container *ngIf="data?.type === 'TEXT'">
+      <div class="text-start contenedor-history">
+        <ng-container *ngIf="data?.url">
+          <ion-button class="my-2" shape="round" size="small" (click)="toggleAccordion()" fill="outline" color="danger"> <ion-icon name="play"></ion-icon></ion-button>
+          <div>
+            <ion-accordion-group #accordionGroup>
+              <ion-accordion value="first" toggleIcon="musical-notes" toggleIconSlot="start">
+                <ion-item style="width: 40%; display: none" slot="header" color="tertiary">
+                  <ion-label></ion-label>
+                </ion-item>
+                <div slot="content">
+                  <small class="text-center" style="font-weight: bold">Reproducir historia</small>
+                  <iframe [src]="data?.url | safe" width="100%" height="30" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+                  <hr style="margin: 0; color: brown">
+                </div>
+              </ion-accordion>
+
+            </ion-accordion-group>
+          </div>
+        </ng-container>
+        <h3 class="text-center my-4">{{data.name}}</h3>
+        <p [ngStyle]="{'font-size': selectedFontSize, 'line-height': selectInterlineado}">
+          {{data?.text_history}}
+        </p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="data?.type === 'VIDEO'">
+      <div class="video-container my-2">
+        <iframe *ngIf="data?.urlYoutube" [src]="data?.urlYoutube | safe"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+        </iframe>
+      </div>
+      <div class="text-start contenedor-history">
+        <p [ngStyle]="{'font-size': selectedFontSize, 'line-height': selectInterlineado}">
+          {{data?.description}}
+        </p>
+      </div>
+    </ng-container>
+    <hr>
+    <div class="d-flex justify-content-between my-2">
+      <small class="d-flex align-items-center"><ion-icon name="star" class="mx-2"></ion-icon><strong>Recomendados</strong></small>
+    </div>
+    <ion-slides [options]="slideOptions">
+      <ion-slide *ngFor="let item of dataRecomendation">
+        <div class="container-padre my-2 d-flex text-start flex-column" (click)="navigatorHistoryRecomendation(item.id)">
+          <div class="contenedor-img">
+            <img alt="Silhouette of mountains" [src]="item.imagen !== null?'https://res.cloudinary.com/dzepvqbgz/image/upload/v1692657127/'+ item.imagen: './assets/img/fondo.jpg'" />
+          </div>
+          <small>{{item.name}}</small>
+        </div>
+      </ion-slide>
+    </ion-slides>
+      <div *ngIf="log" class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-column align-items-center">
+          <ion-icon color="medium" name="cloud-offline" style="font-size: 8rem"></ion-icon>
+          <small class="text-center" style="font-size: 0.9rem; font-weight: bold; color: #92949C">Sin conexión.</small>
+        </div>
+      </div>
+  </div>
+
+</ion-content>
+<ion-footer>
+    <div class="d-flex justify-content-end my-1 mx-2">
+      <!--<ion-button [color]="data?.leido?'tertiary': 'medium'"  shape="round" size="small" *ngIf="usuario !== undefined" (click)="leido(data)">
+        <ion-icon class="mx-1" [name]="data.leido? 'checkbox': 'checkbox-outline'"></ion-icon>
+        {{data?.leido?'Leído': 'No leído'}}
+      </ion-button>-->
+      <ion-button color="danger"  shape="round" size="small" (click)="favoritoStorage(data)">
+        <ion-icon [name]="data?.favorito? 'heart': 'heart-outline'"></ion-icon>
+      </ion-button>
+      <ion-button  [color]="data?.leido?'tertiary': 'medium'"  shape="round" size="small" *ngIf="usuario === undefined && data?.type === 'TEXT'" (click)="leidoStorage(data)">
+        <ion-icon class="mx-1" [name]="data?.leido? 'checkbox': 'checkbox-outline'"></ion-icon>
+        {{data?.leido?'Leído': 'No leído'}}
+      </ion-button>
+      <ion-button [color]="data?.leido?'tertiary': 'medium'"  shape="round" size="small" *ngIf="usuario === undefined && data?.type === 'VIDEO'" (click)="leidoStorage(data)">
+        <ion-icon class="mx-1" [name]="data?.leido? 'checkbox': 'checkbox-outline'"></ion-icon>
+        {{data?.leido?'Visto': 'No Visto'}}
+      </ion-button>
+      <ion-button color="success" fill="clear" shape="round" size="small"> <ion-icon  name="eye"></ion-icon>&nbsp;{{data?.total_visto}}</ion-button>
+      <ion-button color="warning" shape="round" size="small" (click)="openChat(data?.id)"><ion-icon slot="start" name="chatbubbles" ></ion-icon>&nbsp;<strong>{{data?.total_comentarios}}</strong></ion-button>
+
+    </div>
+</ion-footer>

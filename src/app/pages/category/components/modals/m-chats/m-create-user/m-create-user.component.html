@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configurar usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()"><ion-icon name="arrow-back-circle"></ion-icon>&nbsp;Volver</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container my-2">
+    <form [formGroup]="form">
+      <ion-item fill="outline" color="tertiary">
+        <ion-label color="danger" position="floating">Email</ion-label>
+        <ion-input formControlName="email" placeholder="Enter text"></ion-input>
+      </ion-item>
+      <small style="font-size: 12px; color: red" *ngIf="form.get('email').hasError('required') && form.get('email').touched">
+        *El correo electrónico es obligatorio.
+      </small>
+      <small style="font-size: 12px; color: red" *ngIf="form.get('email').hasError('email') && form.get('email').touched">
+        *Por favor, ingresa un correo electrónico válido.
+      </small>
+      <br>
+      <ion-item fill="outline" color="danger">
+        <ion-label color="tertiary" position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre" placeholder="Enter text"></ion-input>
+      </ion-item>
+      <br>
+      <div class="d-flex justify-content-end px-2">
+        <ion-button size="small" color="light" (click)="cancel()">cancelar</ion-button>
+        <ion-button size="small" color="danger" [disabled]="form.invalid" (click)="addStorageuser()">Generar</ion-button>
+      </div>
+    </form>
+  </div>
+
+</ion-content>

@@ -24,3 +24,23 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "node_modules/bootstrap/scss/bootstrap";
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fuentes/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nosifer';
+  src: url('./assets/fuentes/Nosifer-Regular.ttf') format('truetype');
+}
+.example-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+body {
+  font-family: 'ITC Blair', sans-serif;
+  background-color: #0d0d0d !important;
+}

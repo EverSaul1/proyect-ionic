@@ -1,0 +1,49 @@
+.container {
+  background-image: linear-gradient(to bottom, #4B0082, #1C003E, #000000 50%);
+  height: 100%;
+  position: relative;
+  .main{
+    margin-top: 40%;
+  }
+  .title {
+    padding-top: 20px;
+    margin-bottom: 20%;
+    h1 {
+      font-family: Nosifer, serif;
+      font-size: 30px;
+    }
+  }
+  .version{
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    small {
+      color: #8F9BB3;
+      font-family: Verdana, serif;
+      font-weight: bold;
+    }
+  }
+}
+small{
+  color: #8F9BB3;
+  font-family: Verdana, serif;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+.line-container {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #8F9BB3;
+}
+
+.line-text {
+  padding: 0 10px;
+  color: #8F9BB3;
+}
+

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="" style=" color: var(--ion-color-danger-shade); font-weight: bold">
+      Settings</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <div class="container my-2">
+    <ion-list (click)="openPerfil()">
+      <div class="container d-flex align-items-center">
+        <ion-icon color="medium" name="person" style="font-size: 2rem"></ion-icon>
+        <div class="d-flex flex-column mx-2">
+          <span><strong>Perfil</strong></span>
+          <small >Configuracion de Perfil</small>
+        </div>
+      </div>
+    </ion-list>
+    <ion-list class="my-2" (click)="openPoliticas()">
+      <div class="container d-flex align-items-center">
+        <ion-icon color="medium" name="shield" style="font-size: 2rem"></ion-icon>
+        <div class="d-flex flex-column mx-2">
+          <span><strong>Política de privacidad</strong></span>
+          <small >Términos, Políticas de la Aplicación & Política de Privacidad</small>
+        </div>
+      </div>
+    </ion-list>
+    <!--<ion-list class="my-2">
+      <div class="container d-flex align-items-center">
+        <ion-icon color="medium" name="ribbon" style="font-size: 2rem"></ion-icon>
+        <div class="d-flex flex-column mx-2">
+          <span><strong>Acerca de nosotros</strong></span>
+          <small >Contactos & Versión</small>
+        </div>
+      </div>
+    </ion-list>-->
+    <ion-list class="my-2">
+      <div class="container d-flex align-items-center">
+        <ion-icon color="medium" name="mail" style="font-size: 2rem"></ion-icon>
+        <div class="d-flex flex-column mx-2">
+          <span><strong>Envianos tu historia</strong></span>
+          <a href="ever.saul.2017@gmail.com">ever.sau.2017@gmail.com</a>
+        </div>
+      </div>
+    </ion-list>
+    <ion-list class="my-2">
+      <div class="container d-flex align-items-center">
+        <ion-icon color="medium" name="heart" style="font-size: 2rem"></ion-icon>
+        <div class="d-flex flex-column mx-2">
+          <span><strong>Calificanos</strong></span>
+          <small >Calificar nuestra App</small>
+        </div>
+      </div>
+    </ion-list>
+<!--
+    <ion-button *ngIf="usuario !== undefined" size="small" color="danger" expand="full" (click)="unlogued()">Cerrar sesión</ion-button>
+-->
+  </div>
+</ion-content>

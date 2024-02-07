@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()"><ion-icon name="arrow-back-circle" style="font-size: 2rem"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container text-center">
+    <form [formGroup]="formData">
+      <div class="avatar my-3">
+        <ng-container >
+          <img  [src]="formData.value.avatar?url+'/'+formData.value.avatar + '.png': './assets/img/avatar.png'" alt="">
+          <div class="icon" id="open-modal">
+            <ion-icon color="light" style="font-size: 25px" name="pencil"></ion-icon>
+          </div>
+        </ng-container>
+      </div>
+      <ion-item fill="outline" color="tertiary">
+        <ion-label color="danger" position="floating">Email</ion-label>
+        <ion-input formControlName="email" placeholder="Enter text"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item fill="outline">
+        <ion-label color="danger" position="floating">user</ion-label>
+        <ion-input type="text" formControlName="user" placeholder="Enter text"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button  color="danger" size="small" type="submit" (click)="actualizar()" [disabled]="formData.invalid">{{user !== 'NA'? 'Actualizar': 'Generar Usuario'}}</ion-button>
+    </form>
+  </div>
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content >
+        <ion-toolbar>
+          <ion-title>Avatar</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <div class="container py-2" style="background-color: #1E1E1E; min-height: 84%">
+          <ion-grid>
+            <ion-row >
+              <ion-col *ngFor="let item of avatares" size="4">
+                <div class="font" (click)="selectAvatar(item); modal.dismiss()">
+                  <img [src]="item.url">
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

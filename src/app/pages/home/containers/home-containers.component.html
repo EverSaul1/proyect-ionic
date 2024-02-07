@@ -1,0 +1,92 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="container">
+    <div class="title d-flex">
+<!--
+      <ion-icon style="font-size: 25px" name="skull" class="mx-2"></ion-icon>
+-->
+      <h1  class="flex-grow-1 mx-2">Relatos <br> Tenebrosos</h1>
+      <div class="search">
+        <ion-icon class="mx-2" style="font-size: 25px;" name="search" (click)="openModalSearch()"></ion-icon>
+      </div>
+    </div>
+    <br>
+    <div class="main">
+      <app-carousel [dataGigant] = "dataGigant"></app-carousel>
+    </div>
+    <div class="main pt-1" *ngIf="card_category.length !== 0">
+      <div class="d-flex justify-content-between">
+        <small class="d-flex align-items-center"><ion-icon name="flash" class="mx-2"></ion-icon><strong>Categorias</strong></small>
+        <small class="label" (click)="allCategory()">Ver mas</small>
+      </div>
+      <ion-slides [options]="slideOptions2">
+        <ion-slide *ngFor="let card of card_category">
+          <div class="card-category" (click)="routeNavigate(card.id)">
+            <ion-img src="assets/icon/{{card.svg}}.png" alt="aro"></ion-img>
+            <p>{{card.name}}</p>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <div class="main pt-1" *ngIf="cards.length!==0">
+      <div class="d-flex justify-content-between">
+        <small class="d-flex align-items-center"><ion-icon name="flash" class="mx-2"></ion-icon><strong>Recientes</strong></small>
+
+      </div>
+      <ion-slides [options]="slideOptions">
+        <ion-slide *ngFor="let card of cards">
+          <ion-card mode="ios" (click)="navigateUrlHistory(card.id)">
+            <div class="card-image">
+              <img alt="Silhouette of mountains" [src]="'https://res.cloudinary.com/dzepvqbgz/image/upload/v1692657127/'+ card.imagen" />
+              <div class="play-class" *ngIf="card.type !== 'TEXT'">
+                <ion-icon name="play" class="play-icon"></ion-icon>
+              </div>
+              <ion-badge class="d-flex align-items-center image-text" slot="end" color="success"> <ion-icon  name="eye" style="font-size: 15px"></ion-icon>&nbsp;{{card.total_visto}}</ion-badge>
+            </div>
+            <ion-card-header style="text-align: left; max-width: 250px">
+              <ion-card-title class="mb-2">{{card.name }}</ion-card-title>
+              <ion-card-subtitle>
+                <p  class="m-0"> Publicado: &nbsp;{{card.createAt | date: 'MMM d, y'}}</p>
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <div *ngIf="cards.length===0 && dataGigant.length === 0 && card_category.length === 0" class="d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column align-items-center">
+        <ion-icon color="medium" name="cloud-offline" style="font-size: 8rem"></ion-icon>
+        <small class="text-center" style="font-size: 0.9rem; font-weight: bold; color: #92949C">Sin conexión.</small>
+      </div>
+    </div>
+    <!--<div class="main pt-2">
+      <div class="d-flex justify-content-between">
+        <small class="d-flex align-items-center"><ion-icon name="star" class="mx-2"></ion-icon><strong>Destacados</strong></small>
+        <small class="label">Ver mas</small>
+      </div>
+      <ion-slides [options]="slideOptions">
+        <ion-slide *ngFor="let card of cards">
+          <ion-card mode="ios" style="margin: 8px">
+            <div class="image-container">
+              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+              <div class="text-overlay d-flex align-items-center">
+                <small class="image-text">N/A</small>
+                <ion-img style="width: 18px" src="assets/icon/star.png" alt="star"></ion-img>
+              </div>
+            </div>
+            <ion-card-header style="text-align: left">
+              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            </ion-card-header>&lt;!&ndash;
+        <ion-card-content>
+          Here's a small text description for the card content. Nothing more, nothing less.
+        </ion-card-content>&ndash;&gt;
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>-->
+  </div>
+
+</ion-content>
